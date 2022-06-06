@@ -1,6 +1,7 @@
 import React from 'react';
 import UserCreate from './UserCreate';
 import LanguageContext from '../contexts/LanguageContext';
+import ColourContext from '../contexts/ColourContext';
 
 class App extends React.Component{
   state={ language:'english' };
@@ -17,9 +18,12 @@ class App extends React.Component{
       </div>
       {/* {this.state.language} */}
       {/* The prop name of value is very special to a provider. */}
-      <LanguageContext.Provider value={this.state.language}>
-        <UserCreate />
-      </LanguageContext.Provider>
+      {/* Could have been inside LanguageContext also */}
+      <ColourContext.Provider value ='orange'>
+        <LanguageContext.Provider value={this.state.language}>
+          <UserCreate />
+        </LanguageContext.Provider>
+      </ColourContext.Provider>
       {/* <LanguageContext.Provider value={'dutch'}>
         <UserCreate />
       </LanguageContext.Provider> 

@@ -1,5 +1,6 @@
 import React from 'react';
 import LanguageContext from '../contexts/LanguageContext';
+import ColourContext from '../contexts/ColourContext';
 
 class Button extends React.Component{
   // Must be called 'contextType'.
@@ -12,17 +13,26 @@ class Button extends React.Component{
     return value === 'english'?'Submit':'Voorleggen';
   }
   
-  render(){
-    // console.log("this.context=>",this.context);
-    // const text = this.context === 'english'?'Submit':'Voorleggen';
+  // helper function
+  renderButton(colour){
     return (
-      <button className='ui button primary'>
-        {/* {text} */}
+      <button className={`ui button ${colour}`} >
         {/* We are providing a function as a child to a real component. That component is going to take that child function and automatically invoke it for us. */}
         <LanguageContext.Consumer>
           {(value)=>this.renderSubmit(value)}
         </LanguageContext.Consumer>
       </button>
+    );
+  }
+
+  render(){
+    // console.log("this.context=>",this.context);
+    // const text = this.context === 'english'?'Submit':'Voorleggen';
+    return (
+      // Must pass function to consumer component
+      <ColourContext.Consumer>
+        { (colour)=>this.renderButton(colour)}
+      </ColourContext.Consumer>
     )
   }
 }
