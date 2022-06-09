@@ -9,8 +9,8 @@ class Button extends React.Component{
   // static contextType = LanguageContext;  // Context type is only required when we want to get our data assigned to the this.context property.
 
   // Helper method
-  renderSubmit(value){
-    return value === 'english'?'Submit':'Voorleggen';
+  renderSubmit(language){
+    return language === 'english'?'Submit':'Voorleggen';
   }
   
   // helper function
@@ -19,7 +19,8 @@ class Button extends React.Component{
       <button className={`ui button ${colour}`} >
         {/* We are providing a function as a child to a real component. That component is going to take that child function and automatically invoke it for us. */}
         <LanguageContext.Consumer>
-          {(value)=>this.renderSubmit(value)}
+          {/* {(value)=>this.renderSubmit(value)} */}
+          {({ language })=>this.renderSubmit(language)}
         </LanguageContext.Consumer>
       </button>
     );
